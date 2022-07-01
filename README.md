@@ -1,8 +1,22 @@
-Ez egy optimalizált verzió az orp_banking scriptből.
+## Support Discord
+https://discord.gg/AfYDUGW
 
-Maximális fogyasztás: 0,04ms
-Az eredeti script fogyasztása: 0,24ms
+# orp-banking
+Banking script created for ESX Framework that adds functionality to access the main banks and every ATM in the city without hard-coding every atm coordinate in like I see all too much.
 
-Továbbá szükség van a következő scriptek használatára:
-- mythic_notify | https://github.com/JayMontana36/mythic_notify
-- progressBars | https://github.com/EthanPeacock/progressBars
+## Features
+- Access all banks and ATMs in the city
+- Easy to modify
+- Can only deposit money into your bank when you're at an actual bank
+- Clean, custom and simple NUI.
+- Different designed NUI's depending on what ATM you're at
+
+## Using orp-banking
+- Clone or download the repository
+- Add a new folder in your resources called orp-banking
+- Add script files to orp-banking folder
+- In your server.cfg add start orp-banking with your other scripts
+
+## Preview
+https://streamable.com/0773w4
+
