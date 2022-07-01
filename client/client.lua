@@ -62,11 +62,13 @@ Citizen.CreateThread(function()
                 openPlayersBank('atm')
             end
         end
-        if IsControlJustPressed(0, 322) then
-            frontofatm = false
-            frontofbank = false
-            SetNuiFocus(false, false)
-            SendNUIMessage({type = 'close'})
+        if frontofbank or frontofatm then
+            if IsControlJustPressed(0, 322) then
+                frontofatm = false
+                frontofbank = false
+                SetNuiFocus(false, false)
+                SendNUIMessage({type = 'close'})
+            end
         end
         Wait(0)
     end
