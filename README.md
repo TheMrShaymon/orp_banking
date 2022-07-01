@@ -1,4 +1,6 @@
-Ez egy optimalizált verzió az orp_banking scriptből.
+Ez egy optimalizált illetve magyarosított verzió az orp_banking scriptből.
+Credit: https://github.com/HiHowdy
+Bemutató: https://streamable.com/0773w4
 
 Maximális fogyasztás: 0,04ms
 Az eredeti script fogyasztása: 0,24ms
