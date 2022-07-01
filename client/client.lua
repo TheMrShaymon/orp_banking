@@ -1,11 +1,7 @@
 local blipsLoaded = false
-local showBankBlips = true
-local atBank = false
-local bankMenu = true
-local inMenu = false
 local atATM = false
-local elottevagybank = false
-local elottevagyatm = false
+local frontofbank = false
+local frontofatm = false
 local bankColor = "green"
 
 local bankLocations = {
@@ -30,10 +26,10 @@ local ATMs = {
 Citizen.CreateThread(function()
     while true do
         if playerNearATM() then
-            elottevagyatm = true
+            frontofatm = true
         end
         if playerNearBank() then
-            elottevagybank = true
+            frontofbank = true
         end
 
         if not blipsLoaded then
@@ -55,21 +51,20 @@ end)
 
 Citizen.CreateThread(function()
     while true do
-        if elottevagybank and not elottevagyatm then
+        if frontofbank and not frontofatm then
             DisplayHelpText("~INPUT_PICKUP~ ~o~Bank")
             if IsControlJustPressed(0, 38) then
                 openPlayersBank('bank')
             end
-        elseif elottevagyatm and not elottevagybank then
+        elseif frontofatm and not frontofbank then
             DisplayHelpText("~INPUT_PICKUP~ ~o~ATM")
             if IsControlJustPressed(0, 38) then
                 openPlayersBank('atm')
             end
         end
         if IsControlJustPressed(0, 322) then
-            inMenu = false
-            elottevagyatm = false
-            elottevagybank = false
+            frontofatm = false
+            frontofbank = false
             SetNuiFocus(false, false)
             SendNUIMessage({type = 'close'})
         end
@@ -94,14 +89,12 @@ function openPlayersBank(type, color)
     Citizen.Wait(time)
     ClearPedTasks(pped)
     if type == 'bank' then
-        inMenu = true
         SetNuiFocus(true, true)
         bankColor = "green"
         SendNUIMessage({type = 'openBank', color = bankColor})
         TriggerServerEvent('orp_bank:balance')
         atATM = false
     elseif type == 'atm' then
-        inMenu = true
         SetNuiFocus(true, true)
         SendNUIMessage({type = 'openBank', color = bankColor})
         TriggerServerEvent('orp_bank:balance')
@@ -121,7 +114,7 @@ function playerNearATM() -- Check if a player is near ATM
             return true
         end
     end
-    elottevagyatm = false
+    frontofatm = false
     return false
 end
 
@@ -135,7 +128,7 @@ function playerNearBank() -- Checks if a player is near a bank
             return true
         end
     end
-    elottevagybank = false
+    frontofbank = false
     return false
 end
 
@@ -195,7 +188,6 @@ function closePlayersBank()
     exports['progressBars']:startUI(time, "Bankkártya kivétele...")
     Citizen.Wait(time)
     ClearPedTasks(pped)
-    inMenu = false
 end
 
 RegisterNUICallback('transfer', function(data)
@@ -209,7 +201,6 @@ AddEventHandler('orp_bank:notify', function(type, message)
 end)
 
 AddEventHandler('onResourceStop', function(resource)
-    inMenu = false
     SetNuiFocus(false, false)
     SendNUIMessage({type = 'closeAll'})
 end)
