@@ -1,4 +1,5 @@
 Ez egy optimalizált illetve magyarosított verzió az orp_banking scriptből.
+- Framework: ESX
 
 - Credit: https://github.com/HiHowdy
 - Bemutató: https://streamable.com/0773w4
